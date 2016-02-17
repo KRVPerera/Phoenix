@@ -4,10 +4,12 @@
   <artifactId>PhoenixTest</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <dependencies>
-  	<dependency>
-  		<groupId>org.apache.phoenix</groupId>
-  		<artifactId>phoenix</artifactId>
-  		<version>4.6.0-HBase-1.1</version>
-  	</dependency>
+  	
+<!--     <dependency>
+	<groupId>avalon-phoenix</groupId>
+	<artifactId>avalon-phoenix-client</artifactId>
+	<version>4.0.4</version>
+</dependency> -->
+    
   </dependencies>
 </project>

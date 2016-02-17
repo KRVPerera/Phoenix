@@ -32,6 +32,7 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/krv/Downloads/phoenix-4.6.0-HBase-1.1-bin/phoenix-server-client-4.6.0-HBase-1.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/krv/Downloads/phoenix-4.6.0-HBase-1.1-bin/phoenix-4.6.0-HBase-1.1-client.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

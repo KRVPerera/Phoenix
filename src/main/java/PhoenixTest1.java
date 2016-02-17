@@ -7,12 +7,13 @@ public class PhoenixTest1 {
 
 	public static void main(String[] args) {
 		try {
+			System.setProperty("hadoop.home.dir", "c:\\winutil\\");
 			Connection conn;
 			Properties prop = new Properties();
-
+			
 			Class.forName("org.apache.phoenix.jdbc.PhoenixDriver");
 
-			conn = DriverManager.getConnection("jdbc:phoenix:192.168.2.86:/hbase");
+			conn = DriverManager.getConnection("jdbc:phoenix:192.168.2.86:2181:/hbase-unsecure");
 
 			System.out.println("got connection");
 
