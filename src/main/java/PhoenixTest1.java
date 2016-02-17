@@ -1,44 +1,31 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.util.Properties;
+import java.sql.SQLException;
+import java.sql.PreparedStatement;
+import java.sql.Statement;
 
 public class PhoenixTest1 {
 
-	public static void main(String[] args) {
-		try {
-			System.setProperty("hadoop.home.dir", "c:\\winutil\\");
-			Connection conn;
-			Properties prop = new Properties();
-			
-			Class.forName("org.apache.phoenix.jdbc.PhoenixDriver");
-
-			conn = DriverManager.getConnection("jdbc:phoenix:192.168.2.86:2181:/hbase-unsecure");
-
-			System.out.println("got connection");
-
-			ResultSet rst = conn.createStatement().executeQuery("select * from stock_symbol");
-
-			while (rst.next()) {
-				System.out.println(rst.getString(1) + " " + rst.getString(2));
-			}
-
-			System.out.println(conn.createStatement().executeUpdate("delete from stock_symbol"));
-
-			conn.commit();
-
-			rst = conn.createStatement().executeQuery("select * from stock_symbol");
-
-			while (rst.next()) {
-				System.out.println(rst.getString(1) + " " + rst.getString(2));
-			}
-
-			System.out.println(conn.createStatement()
-					.executeUpdate("upsert into stock_symbol values('IBM','International Business Machines')"));
-			conn.commit();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public static void main(String[] args) throws SQLException {
+		System.setProperty("hadoop.home.dir", "c:\\winutil\\");
+		Statement stmt = null;
+		ResultSet rset = null;
+		
+		Connection con = DriverManager.getConnection("jdbc:phoenix:192.168.2.86:2181:/hbase-unsecure");
+		stmt = con.createStatement();
+		
+		stmt.executeUpdate("create table test (mykey integer not null primary key, mycolumn varchar)");
+		stmt.executeUpdate("upsert into test values (1,'Hello')");
+		stmt.executeUpdate("upsert into test values (2,'World!')");
+		con.commit();
+		
+		PreparedStatement statement = con.prepareStatement("select * from test");
+		rset = statement.executeQuery();
+		while (rset.next()) {
+			System.out.println(rset.getString("mycolumn"));
 		}
+		statement.close();
+		con.close();
 	}
 }
